@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:devera_do_an_cuoi_khoa/core/widgets/initial_screen.dart';
 import 'package:devera_do_an_cuoi_khoa/core/widgets/logobrand.dart';
-import 'package:flutter/material.dart';
 import '../widgets/form_widget.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,24 +16,23 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(
-              height: 100.0,
+              height: 50.0,
             ),
             LogoBrand(),
             const SizedBox(
               height: 25.0,
             ),
             Text(
-              'Login To Your Account',
+              'Sign Up For Free',
               style: Theme.of(context).textTheme.headline6,
             ),
             const SizedBox(
               height: 25.0,
             ),
-            FormWidget(isRegister: false),
+            FormWidget(isRegister: true),
           ],
         ),
       ),
     ));
-    ;
   }
 }

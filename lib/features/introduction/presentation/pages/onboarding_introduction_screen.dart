@@ -1,6 +1,6 @@
-import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/pages/login_screen.dart';
+import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/pages/register_screen.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/widgets/logobrandonly_or_withauthorization.dart';
+import '../../../../core/widgets/logobrand.dart';
 import '../../../../core/widgets/initial_screen.dart';
 
 class OnboardingWaitingPage extends StatefulWidget {
@@ -19,7 +19,7 @@ class _OnboardingWaitingPageState extends State<OnboardingWaitingPage> with Sing
             () => Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (BuildContext context) => const LoginScreen()))
+                builder: (BuildContext context) => const RegisterScreen()))
     );
   }
 
@@ -29,6 +29,7 @@ class _OnboardingWaitingPageState extends State<OnboardingWaitingPage> with Sing
       body: Initial_Screen(
           widget: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               LogoBrand(),
               const SizedBox(

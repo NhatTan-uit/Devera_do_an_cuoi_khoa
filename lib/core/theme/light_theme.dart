@@ -6,12 +6,25 @@ ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: primaryColor,
   fontFamily: 'SSP',
+  colorScheme: ColorScheme.light(
+    primary: secondaryColor,
+    secondary: secondaryColor,
+  ),
   bottomSheetTheme: BottomSheetThemeData(backgroundColor: secondaryColor),
   textTheme: TextTheme(
       button: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,
         fontSize: 20,
+      ),
+      bodyText1: TextStyle(
+        color: primaryColor,
+        fontSize: 15.0
+      ),
+      headline6: TextStyle(
+        fontSize: 30.0,
+        color: Colors.black,
+        fontWeight: FontWeight.w800
       ),
       headline3: TextStyle(
         color: primaryColor,
