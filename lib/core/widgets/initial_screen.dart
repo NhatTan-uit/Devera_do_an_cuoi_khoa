@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'logobrandonly_or_withauthorization.dart';
+import 'logobrand.dart';
 
 class Initial_Screen extends StatelessWidget {
   const Initial_Screen({Key? key, required this.widget}) : super(key: key);
@@ -18,6 +18,7 @@ class Initial_Screen extends StatelessWidget {
       ),
       child: Container(
         width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -27,8 +28,8 @@ class Initial_Screen extends StatelessWidget {
                 0.5,
               ],
               colors: [
-                Colors.white.withOpacity(0.1),
-                Colors.white,
+                Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                Theme.of(context).colorScheme.secondary,
               ]
           ),
         ),

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LogoBrand extends StatelessWidget {
-  const LogoBrand({Key? key, this.authorizingForm}) : super(key: key);
-
-  final Widget? authorizingForm;
+  const LogoBrand({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +25,7 @@ class LogoBrand extends StatelessWidget {
           'Deliever Favorite Food',
           style: Theme.of(context).textTheme.subtitle1,
         ),
-        const SizedBox(
-          height: 20,
-        ),
-        Container(
-          child: authorizingForm,
-        )
+
       ],
     );
   }
