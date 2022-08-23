@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1040634878755",
+    "project_id": "devera-flutter-do-an-cuoi-khoa",
+    "storage_bucket": "devera-flutter-do-an-cuoi-khoa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040634878755:android:5719643122169e09920a96",
+        "android_client_info": {
+          "package_name": "com.example.devera_do_an_cuoi_khoa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1040634878755-4rkanird0bj4mbbtcc0hpgdjkj1o3uoa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAe3T6KayANISEV68zl7m3xNru0QDfEVEA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1040634878755-4rkanird0bj4mbbtcc0hpgdjkj1o3uoa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

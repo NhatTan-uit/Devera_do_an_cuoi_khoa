@@ -33,7 +33,7 @@ class _OnboardingWaitingPageState extends State<OnboardingWaitingPage> with Sing
             children: [
               LogoBrand(),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
               CircularProgressIndicator(color: Colors.blueAccent,),
             ],
