@@ -9,7 +9,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
+        body: SingleChildScrollView(
       child: Initial_Screen(
         widget: Column(
           mainAxisSize: MainAxisSize.max,

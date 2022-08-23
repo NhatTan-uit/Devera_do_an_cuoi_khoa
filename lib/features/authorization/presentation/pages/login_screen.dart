@@ -2,6 +2,7 @@ import 'package:devera_do_an_cuoi_khoa/core/widgets/initial_screen.dart';
 import 'package:devera_do_an_cuoi_khoa/core/widgets/logobrand.dart';
 import 'package:flutter/material.dart';
 import '../widgets/form_widget.dart';
+import '../widgets/backward_FAB.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -9,7 +10,14 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+      floatingActionButton: BackwardButton(
+        icon: new Icon(Icons.arrow_back_ios_new_outlined, color: Colors.orange,),
+        onPress: () {
+          Navigator.pop(context);
+          },
+      ),
+        body: SingleChildScrollView(
       child: Initial_Screen(
         widget: Column(
           mainAxisSize: MainAxisSize.max,
@@ -34,6 +42,5 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     ));
-    ;
   }
 }

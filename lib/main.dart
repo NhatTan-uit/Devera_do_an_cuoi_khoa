@@ -1,8 +1,12 @@
 import 'package:devera_do_an_cuoi_khoa/features/introduction/presentation/pages/onboarding_introduction_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:devera_do_an_cuoi_khoa/core/theme/app_theme.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
