@@ -1,8 +1,15 @@
 import 'package:devera_do_an_cuoi_khoa/core/widgets/initial_screen.dart';
 import 'package:devera_do_an_cuoi_khoa/core/widgets/logobrand.dart';
+import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/bloc/email_authorization/email_authorize_bloc.dart';
+import 'package:devera_do_an_cuoi_khoa/features/homepage/presentation/pages/homepage.dart';
+import 'package:devera_do_an_cuoi_khoa/main.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../widgets/form_widget.dart';
 import '../widgets/backward_FAB.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:devera_do_an_cuoi_khoa/core/utils/snackbar_message.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -37,7 +44,46 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(
               height: 25.0,
             ),
-            FormWidget(isRegister: false),
+            BlocConsumer<EmailAuthorizeBloc, EmailAuthorizeState>(
+                builder: (_, state) {
+                  return FormWidget(isRegister: false);
+                },
+                listener: (context, state) {
+                  if (state is FailCacheUser) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return CupertinoAlertDialog(
+                            title: Text('Error Dialog'),
+                            content: Text('Unexpected Error!!'),
+                            actions: <Widget>[
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text('Close')),
+                            ],
+                          );
+                        }
+                    );
+                  }
+                  else if (state is AuthenticationUnauthenticated) {
+                    SnakBarMessage().showErrorSnackBar(
+                        message: state.message, context: context);
+                  }
+                  else if (state is AuthenticationAuthenticated) {
+                    SnakBarMessage().showSuccessSnackBar(
+                        message: state.message, context: context);
+
+                    navigatorKey.currentState!.pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (_) => HomePage(
+                          userLoginStatus: true,
+                          loggedUser: state.userEntities,
+                        )),
+                            (route) => false);
+                  }
+                }
+            ),
           ],
         ),
       ),
