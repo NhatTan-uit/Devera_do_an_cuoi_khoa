@@ -23,17 +23,24 @@ class EmailAuthorizeBloc extends Bloc<EmailAuthorizeEvent, EmailAuthorizeState> 
         final bool checkLoginStatus = await emailAndPassWordAuthorizeUseCase.call(event.userEntities);
 
         if (checkLoginStatus) {
-          await emailAndPassWordAuthorizeUseCase.pushUserToCache(event.userEntities);
+          final bool checkIsEmailVerified = await emailAndPassWordAuthorizeUseCase.isEmailVerified();
 
-          final cacheUser = await emailAndPassWordAuthorizeUseCase.getUser();
+          if (checkIsEmailVerified) {
+            await emailAndPassWordAuthorizeUseCase.pushUserToCache(event.userEntities);
 
-          emit(
-              cacheUser.fold(
-                  (left) => FailCacheUser(message: left),
-                  (right) => AuthenticationAuthenticated(
-                    message: "Login Succesfully",
-                    userEntities: right,))
-          );
+            final cacheUser = await emailAndPassWordAuthorizeUseCase.getUser();
+
+            emit(
+                cacheUser.fold(
+                        (left) => FailCacheUser(message: left),
+                        (right) => AuthenticationAuthenticated(
+                      message: "Login Succesfully",
+                      userEntities: right,))
+            );
+          }
+          else {
+            emit(EmailHasNotVerified(message: "Login Failed! Your email has not been verified yet!"));
+          }
         }
         else emit(AuthenticationUnauthenticated(message: "Login Failed! Please check your email and password"));
       }

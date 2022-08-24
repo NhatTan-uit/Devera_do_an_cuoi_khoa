@@ -3,6 +3,7 @@ import 'package:devera_do_an_cuoi_khoa/features/authorization/data/datasources/l
 import 'package:devera_do_an_cuoi_khoa/features/authorization/data/repositories/authorizing_repositories_impl.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/domain/repositories/authorizing_repo.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/domain/usecase/email_password_authorizing.dart';
+import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/bloc/email_register/email_register_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'features/authorization/presentation/bloc/email_authorization/email_authorize_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +15,9 @@ Future<void> init() async {
 
   //bloc
   s1.registerFactory(() => EmailAuthorizeBloc(
+      emailAndPassWordAuthorizeUseCase: s1()));
+
+  s1.registerFactory(() => EmailRegisterBloc(
       emailAndPassWordAuthorizeUseCase: s1()));
 
   //usecases

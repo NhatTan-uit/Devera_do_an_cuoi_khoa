@@ -6,8 +6,10 @@ class TextFormFieldWidget extends StatelessWidget {
   final bool isObscured;
   final TextEditingController controller;
   final String name;
+  final Icon? icon;
 
   const TextFormFieldWidget({Key? key,
+    this.icon,
     required this.isEmailValidation,
     required this.isObscured,
     required this.name,
@@ -21,6 +23,7 @@ class TextFormFieldWidget extends StatelessWidget {
       scrollPadding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       decoration: InputDecoration(
+          prefixIcon: icon,
           contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           hintText: name,
           focusedBorder:

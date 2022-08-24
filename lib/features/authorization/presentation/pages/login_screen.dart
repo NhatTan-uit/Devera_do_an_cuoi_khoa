@@ -1,6 +1,8 @@
+import 'package:devera_do_an_cuoi_khoa/core/widgets/button_type_one.dart';
 import 'package:devera_do_an_cuoi_khoa/core/widgets/initial_screen.dart';
 import 'package:devera_do_an_cuoi_khoa/core/widgets/logobrand.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/bloc/email_authorization/email_authorize_bloc.dart';
+import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/pages/resend_email_screen.dart';
 import 'package:devera_do_an_cuoi_khoa/features/homepage/presentation/pages/homepage.dart';
 import 'package:devera_do_an_cuoi_khoa/main.dart';
 import 'package:flutter/cupertino.dart';
@@ -82,6 +84,12 @@ class LoginScreen extends StatelessWidget {
                     SnakBarMessage().showErrorSnackBar(
                         message: state.message, context: context);
                     Navigator.pop(context);
+                  }
+                  else if (state is EmailHasNotVerified) {
+                    SnakBarMessage().showErrorSnackBar(
+                        message: state.message, context: context);
+                    Navigator.pop(context);
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => ResendEmailScreen()));
                   }
                   else if (state is AuthenticationAuthenticated) {
                     SnakBarMessage().showSuccessSnackBar(
