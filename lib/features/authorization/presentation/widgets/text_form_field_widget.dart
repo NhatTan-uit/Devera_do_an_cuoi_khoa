@@ -17,7 +17,6 @@ class TextFormFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: isObscured,
-      cursorColor: Theme.of(context).primaryColor,
       controller: controller,
       scrollPadding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),

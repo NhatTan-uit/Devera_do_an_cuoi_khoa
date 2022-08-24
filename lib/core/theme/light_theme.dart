@@ -9,6 +9,11 @@ ThemeData lightTheme = ThemeData(
   inputDecorationTheme: const InputDecorationTheme(
     hintStyle: TextStyle(color: Colors.grey),
   ),
+  textSelectionTheme: TextSelectionThemeData(
+    cursorColor: primaryColor.withOpacity(0.5),
+    selectionColor: Colors.blueAccent.withOpacity(0.5),
+    selectionHandleColor: primaryColor,
+  ),
   colorScheme: ColorScheme.light(
     primary: secondaryColor,
     secondary: secondaryColor,
