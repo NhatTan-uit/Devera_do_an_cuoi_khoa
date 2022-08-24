@@ -42,18 +42,29 @@ class EmailAuthorizeBloc extends Bloc<EmailAuthorizeEvent, EmailAuthorizeState> 
 
         final cacheUser = await emailAndPassWordAuthorizeUseCase.getUser();
 
-        print(cacheUser.isRight());
-
         if (cacheUser.isRight()) {
           emit(
             cacheUser.fold(
                     (left) => FailCacheUser(message: left),
-                    (right) => LoggedUser(
-                        userEntities: right))
+                    (right) => AuthenticationAuthenticated(
+                      message: "Login Succesfully",
+                      userEntities: right,))
           );
         }
         else {
-          emit(UnLoggedUser());
+          emit(AuthenticationUnauthenticated(message: ""));
+        }
+      }
+      else if (event is LogoutEvent) {
+        emit(LoadingUser());
+
+        bool checkLogoutStatus = await emailAndPassWordAuthorizeUseCase.removeUserCache();
+
+        if (checkLogoutStatus) {
+          emit(AuthenticationUnauthenticated(message: ""));
+        }
+        else {
+          emit(FailCacheUser(message: ""));
         }
       }
     });

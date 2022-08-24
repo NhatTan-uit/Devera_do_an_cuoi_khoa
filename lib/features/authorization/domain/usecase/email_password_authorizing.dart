@@ -24,4 +24,8 @@ class EmailAndPassWordAuthorizeUseCase {
   Future<bool> pushUserToCache(UserEntities userEntities) async {
     return await authorizingRepository.pushUserToCache(userEntities);
   }
+
+  Future<bool> removeUserCache() async {
+    return await authorizingRepository.emailAndPasswordLogout();
+  }
 }

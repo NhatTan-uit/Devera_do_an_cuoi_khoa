@@ -7,4 +7,5 @@ abstract class AuthorizingRepository {
   Future<Either<String, UserEntities>> getAuthorizedUser();
   Future<bool> pushUserToCache(UserEntities userEntities);
   Future<bool> emailAndPasswordCheckLoginStatus();
+  Future<bool> emailAndPasswordLogout();
 }

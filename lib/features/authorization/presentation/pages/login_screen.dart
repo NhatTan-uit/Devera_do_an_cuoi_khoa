@@ -49,7 +49,18 @@ class LoginScreen extends StatelessWidget {
                   return FormWidget(isRegister: false);
                 },
                 listener: (context, state) {
-                  if (state is FailCacheUser) {
+                  if (state is LoadingUser) {
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                    );
+                  }
+                  else if (state is FailCacheUser) {
                     showDialog(
                         context: context,
                         builder: (context) {
@@ -70,6 +81,7 @@ class LoginScreen extends StatelessWidget {
                   else if (state is AuthenticationUnauthenticated) {
                     SnakBarMessage().showErrorSnackBar(
                         message: state.message, context: context);
+                    Navigator.pop(context);
                   }
                   else if (state is AuthenticationAuthenticated) {
                     SnakBarMessage().showSuccessSnackBar(

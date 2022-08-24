@@ -16,13 +16,13 @@ class OnboardingWaitingPage extends StatelessWidget {
           if (state is LoadingUser) {
             return OnboardingLoadingWidget();
           }
-          else if (state is LoggedUser) {
+          else if (state is AuthenticationAuthenticated) {
             return HomePage(
               userLoginStatus: true,
               loggedUser: state.userEntities,
             );
           }
-          else if (state is UnLoggedUser) {
+          else if (state is AuthenticationUnauthenticated) {
             return RegisterScreen();
           }
           return OnboardingLoadingWidget();
@@ -31,44 +31,3 @@ class OnboardingWaitingPage extends StatelessWidget {
     );
   }
 }
-
-
-// class OnboardingWaitingPage extends StatefulWidget {
-//   const OnboardingWaitingPage({Key? key}) : super(key: key);
-//
-//   @override
-//   State<OnboardingWaitingPage> createState() => _OnboardingWaitingPageState();
-// }
-//
-// class _OnboardingWaitingPageState extends State<OnboardingWaitingPage> with SingleTickerProviderStateMixin {
-//   @override
-//   void initState() {
-//     super.initState();
-//     Future.delayed(
-//         const Duration(seconds: 3),
-//             () => Navigator.pushReplacement(
-//             context,
-//             MaterialPageRoute(
-//                 builder: (BuildContext context) => const RegisterScreen()))
-//     );
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Initial_Screen(
-//         widget: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           crossAxisAlignment: CrossAxisAlignment.center,
-//           children: [
-//             LogoBrand(),
-//             const SizedBox(
-//               height: 20,
-//             ),
-//             CircularProgressIndicator(color: Colors.blueAccent,),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-//}

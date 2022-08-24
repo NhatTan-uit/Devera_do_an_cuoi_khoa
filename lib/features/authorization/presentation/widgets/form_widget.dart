@@ -7,8 +7,6 @@ import '../../../../core/widgets/button_type_one.dart';
 
 import '../bloc/email_authorization/email_authorize_bloc.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
-
 class FormWidget extends StatefulWidget {
   final bool isRegister;
   //final User? user;
