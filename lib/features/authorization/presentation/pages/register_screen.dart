@@ -1,7 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:devera_do_an_cuoi_khoa/core/widgets/initial_screen.dart';
 import 'package:devera_do_an_cuoi_khoa/core/widgets/logobrand.dart';
+import '../../../../core/utils/snackbar_message.dart';
 import '../widgets/form_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/bloc/email_register/email_register_bloc.dart';
+
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -29,7 +34,47 @@ class RegisterScreen extends StatelessWidget {
             const SizedBox(
               height: 25.0,
             ),
-            FormWidget(isRegister: true),
+            BlocConsumer<EmailRegisterBloc, EmailRegisterState>(
+                builder: (_, state) {
+                  if (state is SignUpVerifyHasNotSent) {
+                    return Column(
+                      children: [
+                        Text(
+                          'Veryfy mail is sending to you...',
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        )
+                      ],
+                    );
+                  }
+                  return FormWidget(isRegister: true);
+                },
+                listener: (context, state) {
+                  if (state is SignUpLoading) {
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                    );
+                  }
+                  else if (state is SignUpFailed) {
+                    SnakBarMessage().showErrorSnackBar(
+                        message: state.message, context: context);
+
+                    Navigator.pop(context);
+                  }
+                  else if (state is SignUpVerifyEmailSent) {
+                    SnakBarMessage().showSuccessSnackBar(
+                        message: "Verify Email sent successfully. Please check your email", context: context);
+                    Navigator.pop(context);
+                  }
+                }
+            ),
           ],
         ),
       ),

@@ -38,6 +38,13 @@ class FailCacheUser extends EmailAuthorizeState {
   List<Object> get props => [message];
 }
 
+class EmailHasNotVerified extends EmailAuthorizeState {
+  final String message;
+
+  const EmailHasNotVerified({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
 class LoadingUser extends EmailAuthorizeState {}
-
-

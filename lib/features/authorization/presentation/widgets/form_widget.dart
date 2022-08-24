@@ -6,6 +6,7 @@ import '../widgets/text_form_field_widget.dart';
 import '../../../../core/widgets/button_type_one.dart';
 
 import '../bloc/email_authorization/email_authorize_bloc.dart';
+import '../bloc/email_register/email_register_bloc.dart';
 
 class FormWidget extends StatefulWidget {
   final bool isRegister;
@@ -59,7 +60,7 @@ class _FormWidgetState extends State<FormWidget> {
                       child: ButtonTypeOne(
                         inputText: 'Login',
                         buttonMarginValue: EdgeInsets.fromLTRB(80, 20, 80, 20),
-                        onPress: AuthorizingRequest,
+                        onPress: authorizingRequest,
                       ),
                     )
                 ),
@@ -68,6 +69,7 @@ class _FormWidgetState extends State<FormWidget> {
                 : Column(
               children: <Widget>[
                 TextFormFieldWidget(
+                  icon: Icon(Icons.account_circle_sharp, color: Theme.of(context).primaryColor,),
                   controller: _userController,
                   name: 'Your name...',
                   isObscured: false,
@@ -77,6 +79,7 @@ class _FormWidgetState extends State<FormWidget> {
                   height: 20,
                 ),
                 TextFormFieldWidget(
+                  icon: Icon(Icons.mail, color: Theme.of(context).primaryColor,),
                   controller: _emailController,
                   name: 'Email',
                   isObscured: false,
@@ -86,6 +89,7 @@ class _FormWidgetState extends State<FormWidget> {
                   height: 20,
                 ),
                 TextFormFieldWidget(
+                  icon: Icon(Icons.lock, color: Theme.of(context).primaryColor,),
                   controller: _passwordController,
                   name: 'Password',
                   isObscured: true,
@@ -98,6 +102,7 @@ class _FormWidgetState extends State<FormWidget> {
                       ButtonTypeOne(
                         inputText: 'Register',
                         buttonMarginValue: EdgeInsets.fromLTRB(80, 20, 80, 0),
+                        onPress: registerRequest,
                       ),
                       GestureDetector(
                         onTap: () {
@@ -124,7 +129,7 @@ class _FormWidgetState extends State<FormWidget> {
     );
   }
 
-  void AuthorizingRequest() async {
+  void authorizingRequest() async {
     final isValid = _formKey.currentState!.validate();
 
     if (isValid) {
@@ -135,6 +140,22 @@ class _FormWidgetState extends State<FormWidget> {
 
      BlocProvider.of<EmailAuthorizeBloc>(context)
           .add(await LoginEvent(userEntities: userinput));
+    }
+  }
+
+  void registerRequest() async {
+    final isValid = _formKey.currentState!.validate();
+
+    if (isValid) {
+      final userinput = UserEntities(
+          userEmail: _emailController.text,
+          passWord: _passwordController.text
+      );
+
+      BlocProvider.of<EmailRegisterBloc>(context)
+          .add(await SignUpEvent(userEntities: userinput));
+
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginScreen()));
     }
   }
 }

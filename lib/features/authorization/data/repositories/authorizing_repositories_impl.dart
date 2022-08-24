@@ -63,4 +63,24 @@ class AuthorizingRepoImpl implements AuthorizingRepository {
 
     return true;
   }
+
+  @override
+  Future<String> emailAndPasswordSignUp(UserEntities userEntities) async {
+    final UserModel userModel = UserModel(
+        userEmail: userEntities.userEmail,
+        passWord: userEntities.passWord
+    );
+
+    return await firebaseConfig.emailAndPasswordSignUp(userModel);
+  }
+
+  @override
+  Future<bool> emailAndPasswordSignUpVerifyEmail() async {
+    return await firebaseConfig.emailAndPasswordSignUpVerifyEmail();
+  }
+
+  @override
+  Future<bool> isEmailVerified() async {
+    return await firebaseConfig.isEmailVerified();
+  }
 }

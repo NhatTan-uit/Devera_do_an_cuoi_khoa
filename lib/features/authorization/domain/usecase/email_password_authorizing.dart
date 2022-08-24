@@ -28,4 +28,16 @@ class EmailAndPassWordAuthorizeUseCase {
   Future<bool> removeUserCache() async {
     return await authorizingRepository.emailAndPasswordLogout();
   }
+
+  Future<String> signUp(UserEntities userEntities) async {
+    return await authorizingRepository.emailAndPasswordSignUp(userEntities);
+  }
+
+  Future<bool> emailAndPasswordSignUpVerifyEmail() async {
+    return await authorizingRepository.emailAndPasswordSignUpVerifyEmail();
+  }
+
+  Future<bool> isEmailVerified() async {
+    return await authorizingRepository.isEmailVerified();
+  }
 }
