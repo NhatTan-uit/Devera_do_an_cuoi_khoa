@@ -9,7 +9,7 @@ class BackwardButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5.0),
+      padding: EdgeInsets.symmetric(horizontal: 15.0),
       child: Container(
         width: 50.0,
         child: FloatingActionButton(

@@ -6,6 +6,9 @@ ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: primaryColor,
   fontFamily: 'SSP',
+  inputDecorationTheme: const InputDecorationTheme(
+    hintStyle: TextStyle(color: Colors.grey),
+  ),
   colorScheme: ColorScheme.light(
     primary: secondaryColor,
     secondary: secondaryColor,

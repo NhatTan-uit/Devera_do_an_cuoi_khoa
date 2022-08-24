@@ -1,7 +1,13 @@
+import 'package:devera_do_an_cuoi_khoa/features/authorization/domain/entities/user.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/pages/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/text_form_field_widget.dart';
 import '../../../../core/widgets/button_type_one.dart';
+
+import '../bloc/email_authorization/email_authorize_bloc.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
 
 class FormWidget extends StatefulWidget {
   final bool isRegister;
@@ -19,6 +25,12 @@ class _FormWidgetState extends State<FormWidget> {
   final TextEditingController _passwordController = TextEditingController();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Expanded(
         child: Padding(
@@ -31,6 +43,8 @@ class _FormWidgetState extends State<FormWidget> {
                 TextFormFieldWidget(
                   controller: _emailController,
                   name: 'Email',
+                  isObscured: false,
+                  isEmailValidation: true,
                 ),
                 const SizedBox(
                   height: 20,
@@ -38,6 +52,8 @@ class _FormWidgetState extends State<FormWidget> {
                 TextFormFieldWidget(
                   controller: _passwordController,
                   name: 'Password',
+                  isObscured: true,
+                  isEmailValidation: false,
                 ),
                 Expanded(
                     child: Align(
@@ -45,6 +61,7 @@ class _FormWidgetState extends State<FormWidget> {
                       child: ButtonTypeOne(
                         inputText: 'Login',
                         buttonMarginValue: EdgeInsets.fromLTRB(80, 20, 80, 20),
+                        onPress: AuthorizingRequest,
                       ),
                     )
                 ),
@@ -55,6 +72,8 @@ class _FormWidgetState extends State<FormWidget> {
                 TextFormFieldWidget(
                   controller: _userController,
                   name: 'Your name...',
+                  isObscured: false,
+                  isEmailValidation: false,
                 ),
                 const SizedBox(
                   height: 20,
@@ -62,6 +81,8 @@ class _FormWidgetState extends State<FormWidget> {
                 TextFormFieldWidget(
                   controller: _emailController,
                   name: 'Email',
+                  isObscured: false,
+                  isEmailValidation: true,
                 ),
                 const SizedBox(
                   height: 20,
@@ -69,6 +90,8 @@ class _FormWidgetState extends State<FormWidget> {
                 TextFormFieldWidget(
                   controller: _passwordController,
                   name: 'Password',
+                  isObscured: true,
+                  isEmailValidation: false,
                 ),
                 Expanded(
                   child: Column(
@@ -101,5 +124,19 @@ class _FormWidgetState extends State<FormWidget> {
           ),
         ),
     );
+  }
+
+  void AuthorizingRequest() async {
+    final isValid = _formKey.currentState!.validate();
+
+    if (isValid) {
+      final userinput = UserEntities(
+          userEmail: _emailController.text,
+          passWord: _passwordController.text
+      );
+
+     BlocProvider.of<EmailAuthorizeBloc>(context)
+          .add(await LoginEvent(userEntities: userinput));
+    }
   }
 }

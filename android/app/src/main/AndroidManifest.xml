@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.devera_do_an_cuoi_khoa">
    <application
+       android:usesCleartextTraffic="true"
         android:label="devera_do_an_cuoi_khoa"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
