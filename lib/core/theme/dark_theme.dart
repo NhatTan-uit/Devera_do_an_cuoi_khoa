@@ -6,6 +6,15 @@ ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     primaryColor: primaryColorDark,
     fontFamily: 'SSP',
+    inputDecorationTheme: const InputDecorationTheme(
+      hintStyle: TextStyle(color: Colors.white54),
+
+    ),
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: primaryColor.withOpacity(0.5),
+      selectionColor: Colors.blueAccent.withOpacity(0.5),
+      selectionHandleColor: primaryColor,
+    ),
     colorScheme: ColorScheme.dark(
       primary: secondaryColorDark,
       secondary: secondaryColorDark,
@@ -30,7 +39,7 @@ ThemeData darkTheme = ThemeData(
           color: primaryColorDark,
           fontWeight: FontWeight.w500,
         ),
-        subtitle1: TextStyle(color: Colors.black, fontWeight: FontWeight.w600)),
+        subtitle1: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
       shape: MaterialStateProperty.all<OutlinedBorder>(
