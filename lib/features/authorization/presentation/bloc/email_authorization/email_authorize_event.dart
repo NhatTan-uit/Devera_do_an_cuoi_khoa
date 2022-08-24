@@ -17,4 +17,6 @@ class LoginEvent extends EmailAuthorizeEvent {
   List<Object> get props => [userEntities];
 }
 
+class LogoutEvent extends EmailAuthorizeEvent {}
+
 class CheckLoggedInEvent extends EmailAuthorizeEvent {}

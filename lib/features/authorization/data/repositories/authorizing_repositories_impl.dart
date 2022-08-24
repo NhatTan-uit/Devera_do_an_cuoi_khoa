@@ -31,9 +31,9 @@ class AuthorizingRepoImpl implements AuthorizingRepository {
 
   @override
   Future<Either<String, UserModel>> getAuthorizedUser() async {
-    UserModel cacheUserModel = await userLocalDataSource.getCached();
+    final cacheUserModel = await userLocalDataSource.getCached();
 
-    if (cacheUserModel == null) {
+    if (cacheUserModel.isLeft()) {
       return Left("Unexpected Error");
     }
     else {
@@ -53,5 +53,14 @@ class AuthorizingRepoImpl implements AuthorizingRepository {
     userLocalDataSource.pushCache(userModel);
 
     return isPush;
+  }
+
+  @override
+  Future<bool> emailAndPasswordLogout() async {
+    await firebaseConfig.emailAndPasswordLogOut();
+
+    await userLocalDataSource.removeUserCache();
+
+    return true;
   }
 }

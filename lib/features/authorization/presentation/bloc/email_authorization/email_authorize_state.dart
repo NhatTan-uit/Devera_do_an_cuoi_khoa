@@ -29,15 +29,6 @@ class AuthenticationUnauthenticated extends EmailAuthorizeState {
   List<Object> get props => [message];
 }
 
-class LoggedUser extends EmailAuthorizeState {
-  final UserEntities userEntities;
-
-  const LoggedUser({required this.userEntities});
-
-  @override
-  List<Object> get props => [userEntities];
-}
-
 class FailCacheUser extends EmailAuthorizeState {
   final String message;
 
@@ -46,8 +37,6 @@ class FailCacheUser extends EmailAuthorizeState {
   @override
   List<Object> get props => [message];
 }
-
-class UnLoggedUser extends EmailAuthorizeState {}
 
 class LoadingUser extends EmailAuthorizeState {}
 

@@ -5,7 +5,7 @@ abstract class FirebaseConfig {
   Future<bool> emailAndPasswordLogIn(UserModel userModel);
   Future<bool> emailAndPasswordCheckLoginStatus();
   Future<UserModel> getAuthorizedUser();
-  Future logOut();
+  Future emailAndPasswordLogOut();
   Future signUp();
 }
 
@@ -60,8 +60,8 @@ class FirebaseConfigImpl implements FirebaseConfig {
   }
 
   @override
-  Future logOut() async {
-
+  Future emailAndPasswordLogOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 
   @override
