@@ -44,6 +44,8 @@ dependencies:
   shared_preferences: ^2.0.15
   email_validator: ^2.1.17
   introduction_screen: ^3.0.2
+  firebase_storage: ^10.3.6
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:

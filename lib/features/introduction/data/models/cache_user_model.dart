@@ -4,18 +4,31 @@ class CacheUserModel extends CacheUserEntities {
   const CacheUserModel({
     String? userId,
     String? userName,
+    String? firstName,
+    String? lastName,
     required String userEmail,
-    required String passWord,
-    String? userImg})
-      : super(userId: userId, userName: userName, userEmail: userEmail, passWord: passWord, userImg: userImg);
+    String? userImg,
+    String? phoneNumber,
+  })
+      : super(
+    userId: userId,
+    userName: userName,
+    firstName: firstName,
+    lastName: lastName,
+    userEmail: userEmail,
+    userImg: userImg,
+    phoneNumber: phoneNumber,
+  );
 
   factory CacheUserModel.fromJson(Map<String, dynamic> json) {
     return CacheUserModel(
       userId: json["userId"],
       userName: json["userName"],
+      firstName: json["firstName"],
+      lastName: json["lastName"],
       userEmail: json["userEmail"],
-      passWord: json["passWord"],
       userImg: json['userImg'],
+      phoneNumber: json["phoneNumber"],
     );
   }
 }

@@ -1,8 +1,9 @@
 import 'package:devera_do_an_cuoi_khoa/core/widgets/initial_screen.dart';
 import 'package:devera_do_an_cuoi_khoa/core/widgets/logobrand.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/bloc/email_authorization/email_authorize_bloc.dart';
+import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/pages/register_user_info.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/pages/resend_email_screen.dart';
-import 'package:devera_do_an_cuoi_khoa/features/products/presentation/pages/homepage.dart';
+import 'package:devera_do_an_cuoi_khoa/features/products/presentation/pages/landing_screen.dart';
 import 'package:devera_do_an_cuoi_khoa/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -95,11 +96,17 @@ class LoginScreen extends StatelessWidget {
                         message: state.message, context: context);
 
                     navigatorKey.currentState!.pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (_) => HomePage(
+                        MaterialPageRoute(builder: (_) => LandingPage(
                           isFromCache: false,
                           loggedUser: state.userEntities,
                         )),
                             (route) => false);
+                  }
+                  else if (state is NewUser) {
+                    SnakBarMessage().showSuccessSnackBar(
+                        message: "Hello New User!! Complete Your Bio now!!", context: context);
+                    Navigator.pop(context);
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => RegisterUserInfo()));
                   }
                 }
             ),

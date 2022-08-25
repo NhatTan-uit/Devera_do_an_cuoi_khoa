@@ -30,7 +30,7 @@ ThemeData lightTheme = ThemeData(
         fontSize: 15.0
       ),
       headline6: TextStyle(
-        fontSize: 30.0,
+        fontSize: 27.0,
         color: Colors.black,
         fontWeight: FontWeight.w800
       ),
@@ -43,6 +43,7 @@ ThemeData lightTheme = ThemeData(
         fontWeight: FontWeight.w600,
       ),
       subtitle2: TextStyle(
+        fontSize: 14.0,
         color:  Colors.black,
       )
   ),

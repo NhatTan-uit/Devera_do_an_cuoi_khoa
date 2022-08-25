@@ -47,4 +47,6 @@ class EmailHasNotVerified extends EmailAuthorizeState {
   List<Object> get props => [message];
 }
 
+class NewUser extends EmailAuthorizeState {}
+
 class LoadingUser extends EmailAuthorizeState {}

@@ -1,5 +1,3 @@
-import 'package:dartz/dartz.dart';
-
 import '../entities/user.dart';
 
 import '../repositories/authorizing_repo.dart';
@@ -39,5 +37,13 @@ class EmailAndPassWordAuthorizeUseCase {
 
   Future<bool> isEmailVerified() async {
     return await authorizingRepository.isEmailVerified();
+  }
+
+  Future<UserEntities> getCurrentUserFromApi(String userId) async {
+    return await authorizingRepository.getCurrentUserFromApi(userId);
+  }
+
+  Future<bool> checkIfFirstTimeUserFromApi(String userId) async {
+    return await authorizingRepository.checkIfFirstTimeUserFromApi(userId);
   }
 }
