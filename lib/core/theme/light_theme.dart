@@ -43,7 +43,7 @@ ThemeData lightTheme = ThemeData(
         fontWeight: FontWeight.w600,
       ),
       subtitle2: TextStyle(
-        fontSize: 14.0,
+        fontSize: 15.0,
         color:  Colors.black,
       )
   ),

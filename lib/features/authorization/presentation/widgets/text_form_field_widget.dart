@@ -7,9 +7,11 @@ class TextFormFieldWidget extends StatelessWidget {
   final TextEditingController controller;
   final String name;
   final Icon? icon;
+  final TextInputType? textInputType;
 
   const TextFormFieldWidget({Key? key,
     this.icon,
+    this.textInputType,
     required this.isEmailValidation,
     required this.isObscured,
     required this.name,
@@ -18,6 +20,7 @@ class TextFormFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: textInputType,
       obscureText: isObscured,
       controller: controller,
       scrollPadding:
