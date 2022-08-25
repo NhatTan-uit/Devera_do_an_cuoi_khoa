@@ -12,4 +12,8 @@ abstract class AuthorizingRepository {
 
   Future<String> emailAndPasswordSignUp(UserEntities userEntities);
   Future<bool> emailAndPasswordSignUpVerifyEmail();
+
+  Future<UserEntities> getCurrentUserFromApi(String userId);
+
+  Future<bool> checkIfFirstTimeUserFromApi(String userId);
 }

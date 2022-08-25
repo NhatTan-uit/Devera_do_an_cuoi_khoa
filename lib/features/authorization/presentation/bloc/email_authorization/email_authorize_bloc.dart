@@ -32,12 +32,21 @@ class EmailAuthorizeBloc extends Bloc<EmailAuthorizeEvent, EmailAuthorizeState> 
           if (checkIsEmailVerified) {
             final user = await emailAndPassWordAuthorizeUseCase.getUser();
 
-            await emailAndPassWordAuthorizeUseCase.pushUserToCache(user);
+            final isNewUser = await emailAndPassWordAuthorizeUseCase.checkIfFirstTimeUserFromApi(user.userId.toString());
 
-            emit(AuthenticationAuthenticated(
-              message: "Login Succesfully",
-              userEntities: user,
-            ));
+            if (isNewUser) {
+              emit(NewUser());
+            }
+            else {
+              final userFromApi = await emailAndPassWordAuthorizeUseCase.getCurrentUserFromApi(user.userId.toString());
+
+              await emailAndPassWordAuthorizeUseCase.pushUserToCache(userFromApi);
+
+              emit(AuthenticationAuthenticated(
+                message: "Login Succesfully",
+                userEntities: userFromApi,
+              ));
+            }
           }
           else {
             emit(EmailHasNotVerified(message: "Login Failed! Your email has not been verified yet!"));

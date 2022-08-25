@@ -2,6 +2,10 @@
 
 A new Flutter project.
 
+## Checkout Web service used as remote datasource in this project
+[https://github.com/NhatTan-uit/devera-do-an-cuoi-khoa-webserver](https://github.com/NhatTan-uit/devera-do-an-cuoi-khoa-webserver)
+This web service only run on localhost, so change uri that used in remote datasoure to access rest api request.
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
