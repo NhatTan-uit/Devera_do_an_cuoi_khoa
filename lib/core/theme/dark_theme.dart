@@ -40,7 +40,7 @@ ThemeData darkTheme = ThemeData(
           fontWeight: FontWeight.w500,
         ),
         subtitle1: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        subtitle2: TextStyle(color: Colors.white, fontSize: 14.0)
+        subtitle2: TextStyle(color: Colors.white, fontSize: 15.0)
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
