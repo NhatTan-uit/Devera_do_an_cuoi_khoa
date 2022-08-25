@@ -20,47 +20,30 @@ class EmailAuthorizeBloc extends Bloc<EmailAuthorizeEvent, EmailAuthorizeState> 
       // TODO: implement event handler
       if (event is LoginEvent) {
         emit(LoadingUser());
-        final bool checkLoginStatus = await emailAndPassWordAuthorizeUseCase.call(event.userEntities);
+        await emailAndPassWordAuthorizeUseCase.emailAndPasswordLogin(event.userEntities);
+
+        final bool checkLoginStatus = await emailAndPassWordAuthorizeUseCase.emailAndPasswordCheckLoginStatus();
+
+        print(checkLoginStatus);
 
         if (checkLoginStatus) {
           final bool checkIsEmailVerified = await emailAndPassWordAuthorizeUseCase.isEmailVerified();
 
           if (checkIsEmailVerified) {
-            await emailAndPassWordAuthorizeUseCase.pushUserToCache(event.userEntities);
+            final user = await emailAndPassWordAuthorizeUseCase.getUser();
 
-            final cacheUser = await emailAndPassWordAuthorizeUseCase.getUser();
+            await emailAndPassWordAuthorizeUseCase.pushUserToCache(user);
 
-            emit(
-                cacheUser.fold(
-                        (left) => FailCacheUser(message: left),
-                        (right) => AuthenticationAuthenticated(
-                      message: "Login Succesfully",
-                      userEntities: right,))
-            );
+            emit(AuthenticationAuthenticated(
+              message: "Login Succesfully",
+              userEntities: user,
+            ));
           }
           else {
             emit(EmailHasNotVerified(message: "Login Failed! Your email has not been verified yet!"));
           }
         }
         else emit(AuthenticationUnauthenticated(message: "Login Failed! Please check your email and password"));
-      }
-      else if (event is CheckLoggedInEvent) {
-        emit(LoadingUser());
-
-        final cacheUser = await emailAndPassWordAuthorizeUseCase.getUser();
-
-        if (cacheUser.isRight()) {
-          emit(
-            cacheUser.fold(
-                    (left) => FailCacheUser(message: left),
-                    (right) => AuthenticationAuthenticated(
-                      message: "Login Succesfully",
-                      userEntities: right,))
-          );
-        }
-        else {
-          emit(AuthenticationUnauthenticated(message: ""));
-        }
       }
       else if (event is LogoutEvent) {
         emit(LoadingUser());
@@ -71,7 +54,7 @@ class EmailAuthorizeBloc extends Bloc<EmailAuthorizeEvent, EmailAuthorizeState> 
           emit(AuthenticationUnauthenticated(message: ""));
         }
         else {
-          emit(FailCacheUser(message: ""));
+          emit(AuthorizingError(message: ""));
         }
       }
     });

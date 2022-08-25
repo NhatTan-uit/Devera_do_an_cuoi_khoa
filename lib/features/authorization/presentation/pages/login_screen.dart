@@ -1,9 +1,8 @@
-import 'package:devera_do_an_cuoi_khoa/core/widgets/button_type_one.dart';
 import 'package:devera_do_an_cuoi_khoa/core/widgets/initial_screen.dart';
 import 'package:devera_do_an_cuoi_khoa/core/widgets/logobrand.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/bloc/email_authorization/email_authorize_bloc.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/pages/resend_email_screen.dart';
-import 'package:devera_do_an_cuoi_khoa/features/homepage/presentation/pages/homepage.dart';
+import 'package:devera_do_an_cuoi_khoa/features/products/presentation/pages/homepage.dart';
 import 'package:devera_do_an_cuoi_khoa/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                         }
                     );
                   }
-                  else if (state is FailCacheUser) {
+                  else if (state is AuthorizingError) {
                     showDialog(
                         context: context,
                         builder: (context) {
@@ -97,7 +96,7 @@ class LoginScreen extends StatelessWidget {
 
                     navigatorKey.currentState!.pushAndRemoveUntil(
                         MaterialPageRoute(builder: (_) => HomePage(
-                          userLoginStatus: true,
+                          isFromCache: false,
                           loggedUser: state.userEntities,
                         )),
                             (route) => false);

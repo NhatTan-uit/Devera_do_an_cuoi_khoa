@@ -6,8 +6,6 @@ import 'dart:convert';
 const CACHED_LOGGED_USER= "CACHED_LOGGED_USER";
 
 abstract class UserLocalDataSource {
-  Future<Either<String, UserModel>> getCached();
-
   Future<Unit> pushCache(UserModel userModel);
 
   Future<Unit> removeUserCache();
@@ -17,21 +15,6 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   final SharedPreferences sharedPreferences;
 
   const UserLocalDataSourceImpl({required this.sharedPreferences});
-
-  @override
-  Future<Either<String, UserModel>> getCached() async {
-    final jsonString = sharedPreferences.getString(CACHED_LOGGED_USER);
-
-    if (jsonString != null) {
-      var decodeJsonData = json.decode(jsonString);
-
-      UserModel loggedUser = UserModel.fromJson(decodeJsonData);
-
-      return Right(loggedUser);
-    }
-
-    return Left("Non cache");
-  }
 
   @override
   Future<Unit> pushCache(UserModel userModel) async {

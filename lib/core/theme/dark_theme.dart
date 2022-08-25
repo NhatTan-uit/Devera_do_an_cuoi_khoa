@@ -39,7 +39,9 @@ ThemeData darkTheme = ThemeData(
           color: primaryColorDark,
           fontWeight: FontWeight.w500,
         ),
-        subtitle1: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+        subtitle1: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+        subtitle2: TextStyle(color: Colors.white)
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
       shape: MaterialStateProperty.all<OutlinedBorder>(

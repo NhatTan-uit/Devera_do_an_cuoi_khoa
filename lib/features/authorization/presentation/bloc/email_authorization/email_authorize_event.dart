@@ -18,5 +18,3 @@ class LoginEvent extends EmailAuthorizeEvent {
 }
 
 class LogoutEvent extends EmailAuthorizeEvent {}
-
-class CheckLoggedInEvent extends EmailAuthorizeEvent {}

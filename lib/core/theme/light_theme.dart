@@ -41,7 +41,11 @@ ThemeData lightTheme = ThemeData(
       subtitle1: TextStyle(
         color: Colors.black,
         fontWeight: FontWeight.w600,
-      )),
+      ),
+      subtitle2: TextStyle(
+        color:  Colors.black,
+      )
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
     padding: MaterialStateProperty.all<EdgeInsetsGeometry>(

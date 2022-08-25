@@ -9,11 +9,11 @@ class EmailAndPassWordAuthorizeUseCase {
 
   EmailAndPassWordAuthorizeUseCase(this.authorizingRepository);
 
-  Future<bool> call(UserEntities userEntities) async {
+  Future emailAndPasswordLogin(UserEntities userEntities) async {
     return await authorizingRepository.emailAndPasswordLogIn(userEntities);
   }
 
-  Future<Either<String, UserEntities>> getUser() async {
+  Future<UserEntities> getUser() async {
     return await authorizingRepository.getAuthorizedUser();
   }
 
@@ -21,7 +21,7 @@ class EmailAndPassWordAuthorizeUseCase {
     return await authorizingRepository.emailAndPasswordCheckLoginStatus();
   }
 
-  Future<bool> pushUserToCache(UserEntities userEntities) async {
+  Future pushUserToCache(UserEntities userEntities) async {
     return await authorizingRepository.pushUserToCache(userEntities);
   }
 

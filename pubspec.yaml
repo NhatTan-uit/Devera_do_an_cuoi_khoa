@@ -43,6 +43,7 @@ dependencies:
   get_it: ^7.2.0
   shared_preferences: ^2.0.15
   email_validator: ^2.1.17
+  introduction_screen: ^3.0.2
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +73,8 @@ flutter:
     - assets/images/foodninja-background.png
     - assets/images/foodninja-splash-light.png
     - assets/images/foodninja-splash-dark.png
+    - assets/images/introduction_screen_1.png
+    - assets/images/introduction_screen_2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

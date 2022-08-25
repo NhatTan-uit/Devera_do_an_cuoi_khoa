@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 abstract class FirebaseConfig {
   Future<bool> isEmailVerified();
 
-  Future<bool> emailAndPasswordLogIn(UserModel userModel);
+  Future emailAndPasswordLogIn(UserModel userModel);
   Future<bool> emailAndPasswordCheckLoginStatus();
   Future<UserModel> getAuthorizedUser();
   Future emailAndPasswordLogOut();
@@ -15,38 +15,29 @@ abstract class FirebaseConfig {
 
 class FirebaseConfigImpl implements FirebaseConfig {
   @override
-  Future<bool> emailAndPasswordLogIn(UserModel userModel) async {
-    bool loginStatus = false;
-
+  Future emailAndPasswordLogIn(UserModel userModel) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: userModel.userEmail.trim(),
           password: userModel.passWord.trim()
       );
-
-      loginStatus = true;
     } on FirebaseAuthException catch (e) {
       print(e.message);
     }
-
-    return loginStatus;
   }
 
   @override
   Future<bool> emailAndPasswordCheckLoginStatus() async {
-    bool loginStatus = false;
-    await FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        print('User is currently signed out!');
-        loginStatus = false;
-      } else {
-        print('User is signed in!');
-        loginStatus = true;
-      }
-    });
+    await FirebaseAuth.instance.currentUser!.reload();
 
-    print(loginStatus);
-    return loginStatus;
+    final isUser = await FirebaseAuth.instance.authStateChanges();
+
+    if (isUser != null) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
   @override
@@ -59,7 +50,7 @@ class FirebaseConfigImpl implements FirebaseConfig {
       passWord: '',
     );
 
-    print(userModel.userId);
+    print(userModel);
     return userModel;
   }
 
