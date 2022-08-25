@@ -1,9 +1,16 @@
+//authorization
 import 'package:devera_do_an_cuoi_khoa/features/authorization/data/datasources/local/db/firebase_config.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/data/datasources/local/share_references/local.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/data/repositories/authorizing_repositories_impl.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/domain/repositories/authorizing_repo.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/domain/usecase/email_password_authorizing.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/bloc/email_register/email_register_bloc.dart';
+//introduction
+import 'package:devera_do_an_cuoi_khoa/features/introduction/data/datasources/local/share_references/local.dart';
+import 'package:devera_do_an_cuoi_khoa/features/introduction/data/repositories/check_cache_user_repo_iml.dart';
+import 'package:devera_do_an_cuoi_khoa/features/introduction/domain/repositories/check_cache_user_repo.dart';
+import 'package:devera_do_an_cuoi_khoa/features/introduction/domain/usecase/check_cache_exist.dart';
+import 'package:devera_do_an_cuoi_khoa/features/introduction/presentation/bloc/check_user_cache/check_user_cache_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'features/authorization/presentation/bloc/email_authorization/email_authorize_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,6 +18,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 final s1 = GetIt.instance;
 
 Future<void> init() async {
+  //Features - introduction
+
+  //bloc
+  s1.registerFactory(() => CheckUserCacheBloc(
+      checkCacheUserUseCase: s1()));
+
+  //usecase
+  s1.registerLazySingleton(() => CheckCacheUserUseCase(s1()));
+
+  //repository
+  s1.registerLazySingleton<CheckCacheUserRepository>(() => CheckCacheUserRepoImpl(
+    checkUserLocalDataSource: s1()
+  ));
+
+  //datasource
+  s1.registerLazySingleton<CheckUserLocalDataSource>(() => CheckUserLocalDataSourceImpl(
+      sharedPreferences: s1()));
+
   //Features - authorize
 
   //bloc

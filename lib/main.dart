@@ -1,5 +1,6 @@
 import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/bloc/email_authorization/email_authorize_bloc.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/bloc/email_register/email_register_bloc.dart';
+import 'package:devera_do_an_cuoi_khoa/features/introduction/presentation/bloc/check_user_cache/check_user_cache_bloc.dart';
 import 'package:devera_do_an_cuoi_khoa/features/introduction/presentation/pages/onboarding_introduction_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -31,12 +32,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider(
-              create: (_) => di.s1<EmailAuthorizeBloc>()..add(CheckLoggedInEvent()),
-          ),
+          // BlocProvider(
+          //     create: (_) => di.s1<EmailAuthorizeBloc>()..add(CheckLoggedInEvent()),
+          // ),
           BlocProvider(
               create: (_) => di.s1<EmailRegisterBloc>(),
           ),
+          BlocProvider(
+              create: (_) => di.s1<CheckUserCacheBloc>()..add(CheckUserLoggedInEvent()),
+          ),
+          BlocProvider(
+              create: (_) => di.s1<EmailAuthorizeBloc>(),
+          )
         ],
         child: MaterialApp(
           title: 'FinalProjectApp',

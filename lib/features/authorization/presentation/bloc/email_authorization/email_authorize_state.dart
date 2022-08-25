@@ -29,10 +29,10 @@ class AuthenticationUnauthenticated extends EmailAuthorizeState {
   List<Object> get props => [message];
 }
 
-class FailCacheUser extends EmailAuthorizeState {
+class AuthorizingError extends EmailAuthorizeState {
   final String message;
 
-  const FailCacheUser({required this.message});
+  const AuthorizingError({required this.message});
 
   @override
   List<Object> get props => [message];

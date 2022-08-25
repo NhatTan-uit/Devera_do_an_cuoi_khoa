@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/data/datasources/local/db/firebase_config.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/data/datasources/local/share_references/local.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/data/models/user_model.dart';
@@ -13,15 +12,13 @@ class AuthorizingRepoImpl implements AuthorizingRepository {
   AuthorizingRepoImpl({required this.firebaseConfig, required this.userLocalDataSource});
 
   @override
-  Future<bool> emailAndPasswordLogIn(UserEntities userEntities) async {
+  Future emailAndPasswordLogIn(UserEntities userEntities) async {
     final UserModel userModel = UserModel(
         userEmail: userEntities.userEmail,
         passWord: userEntities.passWord
     );
 
-    bool loginStatus = await firebaseConfig.emailAndPasswordLogIn(userModel);
-
-    return loginStatus;
+    await firebaseConfig.emailAndPasswordLogIn(userModel);
   }
 
   @override
@@ -30,29 +27,21 @@ class AuthorizingRepoImpl implements AuthorizingRepository {
   }
 
   @override
-  Future<Either<String, UserModel>> getAuthorizedUser() async {
-    final cacheUserModel = await userLocalDataSource.getCached();
-
-    if (cacheUserModel.isLeft()) {
-      return Left("Unexpected Error");
-    }
-    else {
-      return Right(await firebaseConfig.getAuthorizedUser());
-    }
+  Future<UserModel> getAuthorizedUser() async {
+      return await firebaseConfig.getAuthorizedUser();
   }
 
   @override
-  Future<bool> pushUserToCache(UserEntities userEntities) async {
-    bool isPush = true;
+  Future pushUserToCache(UserEntities userEntities) async {
 
-    final UserModel userModel = UserModel(
+    UserModel userModel = UserModel(
+        userId: userEntities.userId,
         userEmail: userEntities.userEmail,
-        passWord: userEntities.passWord
+        passWord: userEntities.passWord,
+        userImg: "Hello From Me!!!"
     );
 
     userLocalDataSource.pushCache(userModel);
-
-    return isPush;
   }
 
   @override
