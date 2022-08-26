@@ -39,7 +39,7 @@ class TextFormFieldWidget extends StatelessWidget {
         else if (isEmailValidation){
           return !EmailValidator.validate(val)? "The email address is badly formatted" : null;
         }
-        else {
+        else if (isObscured){
           return val.length < 6 ? "Fields must contain atleast 6 characters" : null;
         }
       },

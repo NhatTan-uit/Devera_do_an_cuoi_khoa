@@ -3,9 +3,9 @@ import 'package:devera_do_an_cuoi_khoa/features/authorization/data/datasources/l
 import 'package:devera_do_an_cuoi_khoa/features/authorization/data/datasources/remote/remote.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/data/models/user_model.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/domain/entities/user.dart';
+import 'package:file_picker/file_picker.dart';
 
 import '../../domain/repositories/authorizing_repo.dart';
-import 'package:dartz/dartz.dart';
 
 class AuthorizingRepoImpl implements AuthorizingRepository {
   final FirebaseConfig firebaseConfig;
@@ -42,13 +42,13 @@ class AuthorizingRepoImpl implements AuthorizingRepository {
   Future pushUserToCache(UserEntities userEntities) async {
 
     UserModel userModel = UserModel(
-        userId: userEntities.userId,
-        userName: userEntities.userName,
-        firstName: userEntities.firstName,
-        lastName: userEntities.lastName,
-        userEmail: userEntities.userEmail,
-        passWord: "",
-        userImg: userEntities.userImg
+      userId: userEntities.userId,
+      firstName: userEntities.firstName,
+      lastName: userEntities.lastName,
+      userEmail: userEntities.userEmail,
+      passWord: "",
+      userImg: userEntities.userImg,
+      phoneNumber: userEntities.phoneNumber,
     );
 
     userLocalDataSource.pushCache(userModel);
@@ -91,5 +91,30 @@ class AuthorizingRepoImpl implements AuthorizingRepository {
   @override
   Future<bool> checkIfFirstTimeUserFromApi(String userId) async {
     return await userRemoteDataSource.checkIfFirstTimeUserFromApi(userId);
+  }
+
+  @override
+  Future registerUserImage(PlatformFile pickedfile) async {
+    await firebaseConfig.registerUserImage(pickedfile);
+  }
+
+  @override
+  Future postUserProfileToApi(UserEntities userEntities) async {
+    UserModel userModel = UserModel(
+      userId: userEntities.userId,
+      firstName: userEntities.firstName,
+      lastName: userEntities.lastName,
+      userEmail: userEntities.userEmail,
+      passWord: "",
+      userImg: userEntities.userImg,
+      phoneNumber: userEntities.phoneNumber,
+    );
+
+    await userRemoteDataSource.postUserProfileToApi(userModel);
+  }
+
+  @override
+  Future<String> getImage(String userImg) async {
+    return await firebaseConfig.getImage(userImg);
   }
 }

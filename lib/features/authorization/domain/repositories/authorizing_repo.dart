@@ -1,4 +1,7 @@
+import 'package:file_picker/file_picker.dart';
+
 import '../entities/user.dart';
+
 
 
 abstract class AuthorizingRepository {
@@ -16,4 +19,10 @@ abstract class AuthorizingRepository {
   Future<UserEntities> getCurrentUserFromApi(String userId);
 
   Future<bool> checkIfFirstTimeUserFromApi(String userId);
+
+  Future registerUserImage(PlatformFile pickedfile);
+
+  Future postUserProfileToApi(UserEntities UserEntities);
+
+  Future<String> getImage(String userImg);
 }

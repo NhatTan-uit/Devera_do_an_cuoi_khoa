@@ -1,3 +1,6 @@
+import 'package:devera_do_an_cuoi_khoa/features/authorization/data/models/user_model.dart';
+import 'package:file_picker/file_picker.dart';
+
 import '../entities/user.dart';
 
 import '../repositories/authorizing_repo.dart';
@@ -45,5 +48,17 @@ class EmailAndPassWordAuthorizeUseCase {
 
   Future<bool> checkIfFirstTimeUserFromApi(String userId) async {
     return await authorizingRepository.checkIfFirstTimeUserFromApi(userId);
+  }
+
+  Future registerUserImage(PlatformFile pickedfile) async {
+    await authorizingRepository.registerUserImage(pickedfile);
+  }
+
+  Future postUserProfileToApi(UserEntities UserEntities) async {
+    await authorizingRepository.postUserProfileToApi(UserEntities);
+  }
+
+  Future<String> getImage(String userImg) async {
+    return await authorizingRepository.getImage(userImg);
   }
 }

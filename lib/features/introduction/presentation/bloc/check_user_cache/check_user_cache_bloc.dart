@@ -1,3 +1,4 @@
+import 'package:devera_do_an_cuoi_khoa/features/introduction/data/models/cache_user_model.dart';
 import 'package:devera_do_an_cuoi_khoa/features/introduction/domain/entities/cache_user.dart';
 import 'package:equatable/equatable.dart';
 import 'package:devera_do_an_cuoi_khoa/features/introduction/domain/usecase/check_cache_exist.dart';
@@ -33,8 +34,8 @@ class CheckUserCacheBloc
           emit(cacheUser.fold(
                   (left) => UserUnCached(message: left),
                   (right) => UserCached(
-                message: "Login Succesfully",
-                checkUserEntities: right,
+                    message: "Login Succesfully",
+                    checkUserEntities: right,
               )));
         }
       }
