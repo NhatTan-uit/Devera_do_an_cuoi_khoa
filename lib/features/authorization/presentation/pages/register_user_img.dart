@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/pages/register_user_completed.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../widgets/backward_FAB.dart';
 import '../widgets/bio_item_container.dart';
@@ -10,12 +12,16 @@ import 'package:devera_do_an_cuoi_khoa/core/widgets/initial_screen.dart';
 import 'package:devera_do_an_cuoi_khoa/core/widgets/button_type_one.dart';
 
 class RegisterUserImage extends StatefulWidget {
+  final String userId;
+  final String userEmail;
   final String firstName;
   final String lastName;
   final String phoneNumber;
 
   const RegisterUserImage({
     Key? key,
+    required this.userId,
+    required this.userEmail,
     required this.firstName,
     required this.lastName,
     required this.phoneNumber
@@ -101,7 +107,7 @@ class _RegisterUserImageState extends State<RegisterUserImage> {
                         child: ButtonTypeOne(
                           inputText: 'Next',
                           buttonMarginValue: EdgeInsets.fromLTRB(80, 20, 80, 20),
-                          onPress: () {},
+                          onPress: toCompleteBio,
                         ),
                       )
                   ),
@@ -126,5 +132,49 @@ class _RegisterUserImageState extends State<RegisterUserImage> {
     setState(() {
       pickedFile = null;
     });
+  }
+
+  void toCompleteBio() {
+    if (pickedFile == null) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return CupertinoAlertDialog(
+              title: Text('Image has not been picked'),
+              content: Text('If you dont pick a image, your profile image will be default user image'),
+              actions: <Widget>[
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Cancel')),
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (_) => RegisterUserBioCompletedScreen(
+                              userId: widget.userId,
+                              userEmail: widget.userEmail,
+                              firstName: widget.firstName,
+                              lastName: widget.lastName,
+                              phoneNumber: widget.phoneNumber
+                          )));
+                    },
+                    child: Text('Confirm')),
+              ],
+            );
+          }
+      );
+    }
+    else {
+      Navigator.push(context, MaterialPageRoute(
+          builder: (_) => RegisterUserBioCompletedScreen(
+            userId: widget.userId,
+            userEmail: widget.userEmail,
+            firstName: widget.firstName,
+            lastName: widget.lastName,
+            phoneNumber: widget.phoneNumber,
+            userImg: pickedFile,
+          )));
+    }
   }
 }

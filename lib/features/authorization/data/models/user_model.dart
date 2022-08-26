@@ -25,7 +25,6 @@ class UserModel extends UserEntities {
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       userId: json["userId"] as String,
-      userName: json["userName"] as String,
       firstName: json["firstName"] as String,
       lastName: json["lastName"] as String,
       userEmail: json["userEmail"] as String,

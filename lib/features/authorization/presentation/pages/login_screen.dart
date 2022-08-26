@@ -97,6 +97,7 @@ class LoginScreen extends StatelessWidget {
 
                     navigatorKey.currentState!.pushAndRemoveUntil(
                         MaterialPageRoute(builder: (_) => LandingPage(
+                          userImg: state.userImg,
                           isFromCache: false,
                           loggedUser: state.userEntities,
                         )),
@@ -106,7 +107,11 @@ class LoginScreen extends StatelessWidget {
                     SnakBarMessage().showSuccessSnackBar(
                         message: "Hello New User!! Complete Your Bio now!!", context: context);
                     Navigator.pop(context);
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => RegisterUserInfo()));
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (_) => RegisterUserInfo(
+                          userId: state.userId,
+                          userEmail: state.userEmail,
+                        )));
                   }
                 }
             ),

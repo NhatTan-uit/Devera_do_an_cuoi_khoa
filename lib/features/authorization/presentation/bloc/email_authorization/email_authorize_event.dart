@@ -18,3 +18,5 @@ class LoginEvent extends EmailAuthorizeEvent {
 }
 
 class LogoutEvent extends EmailAuthorizeEvent {}
+
+

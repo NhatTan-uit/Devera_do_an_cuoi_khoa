@@ -6,6 +6,7 @@ import 'package:devera_do_an_cuoi_khoa/features/authorization/data/repositories/
 import 'package:devera_do_an_cuoi_khoa/features/authorization/domain/repositories/authorizing_repo.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/domain/usecase/email_password_authorizing.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/bloc/email_register/email_register_bloc.dart';
+import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/bloc/email_user_profile/email_user_profile_bloc.dart';
 //introduction
 import 'package:devera_do_an_cuoi_khoa/features/introduction/data/datasources/local/share_references/local.dart';
 import 'package:devera_do_an_cuoi_khoa/features/introduction/data/repositories/check_cache_user_repo_iml.dart';
@@ -32,7 +33,7 @@ Future<void> init() async {
 
   //repository
   s1.registerLazySingleton<CheckCacheUserRepository>(() => CheckCacheUserRepoImpl(
-    checkUserLocalDataSource: s1()
+    checkUserLocalDataSource: s1(),
   ));
 
   //datasource
@@ -46,6 +47,9 @@ Future<void> init() async {
       emailAndPassWordAuthorizeUseCase: s1()));
 
   s1.registerFactory(() => EmailRegisterBloc(
+      emailAndPassWordAuthorizeUseCase: s1()));
+
+  s1.registerFactory(() => EmailUserProfileBloc(
       emailAndPassWordAuthorizeUseCase: s1()));
 
   //usecases

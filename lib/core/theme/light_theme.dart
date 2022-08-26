@@ -29,6 +29,11 @@ ThemeData lightTheme = ThemeData(
         color: primaryColor,
         fontSize: 15.0
       ),
+      headline5: TextStyle(
+        color: primaryColor,
+        fontSize: 29.0,
+        fontWeight: FontWeight.w800,
+      ),
       headline6: TextStyle(
         fontSize: 27.0,
         color: Colors.black,

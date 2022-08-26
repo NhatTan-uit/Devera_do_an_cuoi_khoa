@@ -30,7 +30,7 @@ class OnboardingWaitingPage extends StatelessWidget {
             return RegisterScreen();
           }
           else if (state is UserBeenToApp) {
-            return RegisterScreen();
+            return OnboardingLoadingWidget();
           }
           return OnboardingLoadingWidget();
         }

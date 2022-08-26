@@ -5,10 +5,11 @@ import 'package:devera_do_an_cuoi_khoa/features/authorization/domain/entities/us
 
 class LandingPage extends StatefulWidget {
   final bool isFromCache;
+  final String? userImg;
   final UserEntities? loggedUser;
   final CacheUserEntities? cachedUser;
 
-  const LandingPage({Key? key, required this.isFromCache, this.cachedUser, this.loggedUser}) : super(key: key);
+  const LandingPage({Key? key, required this.isFromCache, this.cachedUser, this.loggedUser, this.userImg}) : super(key: key);
 
   @override
   State<LandingPage> createState() => _LandingPageState();
@@ -24,6 +25,7 @@ class _LandingPageState extends State<LandingPage> {
       isFromCache: widget.isFromCache,
       loggedUser: widget.loggedUser,
       cachedUser: widget.cachedUser,
+      userImg: widget.userImg,
     ),
   ];
 

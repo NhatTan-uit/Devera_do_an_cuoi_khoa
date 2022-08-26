@@ -13,11 +13,12 @@ class EmailAuthorizeInitial extends EmailAuthorizeState {}
 class AuthenticationAuthenticated extends EmailAuthorizeState {
   final String message;
   final UserEntities userEntities;
+  final String userImg;
 
-  const AuthenticationAuthenticated({required this.message, required this.userEntities});
+  const AuthenticationAuthenticated({required this.userImg, required this.message, required this.userEntities});
 
   @override
-  List<Object> get props => [message, userEntities];
+  List<Object> get props => [message, userEntities, userImg];
 }
 
 class AuthenticationUnauthenticated extends EmailAuthorizeState {
@@ -47,6 +48,14 @@ class EmailHasNotVerified extends EmailAuthorizeState {
   List<Object> get props => [message];
 }
 
-class NewUser extends EmailAuthorizeState {}
+class NewUser extends EmailAuthorizeState {
+  final String userId;
+  final String userEmail;
+
+  const NewUser({required this.userId, required this.userEmail});
+
+  @override
+  List<Object> get props => [userId, userEmail];
+}
 
 class LoadingUser extends EmailAuthorizeState {}

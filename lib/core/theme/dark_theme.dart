@@ -27,8 +27,13 @@ ThemeData darkTheme = ThemeData(
           fontSize: 20,
         ),
         bodyText1: TextStyle(
-          color: primaryColor,
+          color: primaryColorDark,
             fontSize: 15.0
+        ),
+        headline5: TextStyle(
+          color: primaryColorDark,
+          fontSize: 29.0,
+          fontWeight: FontWeight.w800,
         ),
         headline6: TextStyle(
             fontSize: 27.0,

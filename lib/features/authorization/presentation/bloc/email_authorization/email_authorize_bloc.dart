@@ -35,16 +35,22 @@ class EmailAuthorizeBloc extends Bloc<EmailAuthorizeEvent, EmailAuthorizeState> 
             final isNewUser = await emailAndPassWordAuthorizeUseCase.checkIfFirstTimeUserFromApi(user.userId.toString());
 
             if (isNewUser) {
-              emit(NewUser());
+              emit(NewUser(
+                userId: user.userId.toString(),
+                userEmail: user.userEmail.toString(),
+              ));
             }
             else {
               final userFromApi = await emailAndPassWordAuthorizeUseCase.getCurrentUserFromApi(user.userId.toString());
 
               await emailAndPassWordAuthorizeUseCase.pushUserToCache(userFromApi);
 
+              String userImg = await emailAndPassWordAuthorizeUseCase.getImage(userFromApi.userImg.toString());
+
               emit(AuthenticationAuthenticated(
                 message: "Login Succesfully",
                 userEntities: userFromApi,
+                userImg: userImg
               ));
             }
           }

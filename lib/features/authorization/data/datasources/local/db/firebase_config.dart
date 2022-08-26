@@ -1,5 +1,10 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
+
 import '../../../models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 abstract class FirebaseConfig {
   Future<bool> isEmailVerified();
@@ -11,6 +16,10 @@ abstract class FirebaseConfig {
 
   Future<String> emailAndPasswordSignUp(UserModel userModel);
   Future<bool> emailAndPasswordSignUpVerifyEmail();
+
+  Future registerUserImage(PlatformFile pickedfile);
+
+  Future<String> getImage(String userImg);
 }
 
 class FirebaseConfigImpl implements FirebaseConfig {
@@ -92,5 +101,31 @@ class FirebaseConfigImpl implements FirebaseConfig {
     await FirebaseAuth.instance.currentUser!.reload();
 
     return FirebaseAuth.instance.currentUser!.emailVerified;
+  }
+
+  @override
+  Future registerUserImage(PlatformFile pickedFile) async {
+    final path = 'userprofileimage/${pickedFile.name}';
+
+    final file = File(pickedFile.path!);
+
+    final ref = FirebaseStorage.instance.ref().child(path);
+
+    UploadTask uploadTask = ref.putFile(file);
+
+    final snapshot = await uploadTask.whenComplete(() => {});
+
+    final urlDownload = await snapshot.ref.getDownloadURL();
+
+    print('Download link: $urlDownload');
+  }
+
+  @override
+  Future<String> getImage(String userImg) async {
+    final path = 'userprofileimage/${userImg}';
+
+    final ref = FirebaseStorage.instance.ref().child(path);
+
+    return ref.getDownloadURL();
   }
 }

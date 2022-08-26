@@ -1,5 +1,6 @@
 import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/bloc/email_authorization/email_authorize_bloc.dart';
 import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/bloc/email_register/email_register_bloc.dart';
+import 'package:devera_do_an_cuoi_khoa/features/authorization/presentation/bloc/email_user_profile/email_user_profile_bloc.dart';
 import 'package:devera_do_an_cuoi_khoa/features/introduction/presentation/bloc/check_user_cache/check_user_cache_bloc.dart';
 import 'package:devera_do_an_cuoi_khoa/features/introduction/presentation/pages/onboarding_introduction_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -43,7 +44,10 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
               create: (_) => di.s1<EmailAuthorizeBloc>(),
-          )
+          ),
+          BlocProvider(
+              create: (_) => di.s1<EmailUserProfileBloc>(),
+          ),
         ],
         child: MaterialApp(
           title: 'FinalProjectApp',

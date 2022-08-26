@@ -106,18 +106,6 @@ class _FormWidgetState extends State<FormWidget> {
                       ),
                       GestureDetector(
                         onTap: () async {
-                          showDialog(
-                              context: context,
-                              barrierDismissible: false,
-                              builder: (context) {
-                                return Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              }
-                          );
-                          await Future.delayed(const Duration(seconds: 1), (){});
-                          Navigator.pop(context);
-
                           Navigator.push(context, MaterialPageRoute(builder: (_) => LoginScreen()));
                         },
                         child: Container(

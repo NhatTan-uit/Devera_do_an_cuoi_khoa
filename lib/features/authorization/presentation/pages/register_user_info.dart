@@ -7,7 +7,9 @@ import '../widgets/text_form_field_widget.dart';
 import 'package:devera_do_an_cuoi_khoa/core/widgets/button_type_one.dart';
 
 class RegisterUserInfo extends StatefulWidget {
-  const RegisterUserInfo({Key? key}) : super(key: key);
+  final String userId;
+  final String userEmail;
+  const RegisterUserInfo({Key? key, required this.userEmail, required this.userId}) : super(key: key);
 
   @override
   State<RegisterUserInfo> createState() => _RegisterUserInfoState();
@@ -116,6 +118,8 @@ class _RegisterUserInfoState extends State<RegisterUserInfo> {
           context,
           MaterialPageRoute(
               builder: (_) => RegisterUserImage(
+                  userId: widget.userId,
+                  userEmail: widget.userEmail,
                   firstName: _firstNameController.text,
                   lastName: _lastNameController.text,
                   phoneNumber: _phoneNumberController.text

@@ -6,6 +6,9 @@ const authorizingApi = "http://192.168.158.177:4000";
 
 abstract class UserRemoteDataSource {
   Future<UserModel> getCurrentUserFromApi(String userId);
+
+  Future postUserProfileToApi(UserModel userModel);
+
   Future<bool> checkIfFirstTimeUserFromApi(String userId);
 }
 
@@ -57,5 +60,23 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     }
 
     return false;
+  }
+
+  @override
+  Future postUserProfileToApi(UserModel userModel) async {
+    final postId = json.encode({
+      "userId": userModel.userId.toString(),
+      "userEmail": userModel.userEmail.toString(),
+      "firstName": userModel.firstName.toString(),
+      "lastName": userModel.lastName.toString(),
+      "userImg": userModel.userImg.toString(),
+      "phoneNumber": userModel.phoneNumber.toString(),
+    });
+
+    final response = await client.post(
+      Uri.parse("$authorizingApi/users/add"),
+      headers: {"Content-Type": "application/json"},
+      body: postId,
+    );
   }
 }
